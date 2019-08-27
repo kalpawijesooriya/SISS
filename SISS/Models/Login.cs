@@ -10,8 +10,13 @@ namespace SISS.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage = "Plese Enter Your User PassWord")]
         public string password { get; set; }
-        public string uderName { get; set; }
+        [Required(ErrorMessage = "Plese Enter Your User Name")]
+        public string userName { get; set; }
+        public string LoginErrorMessage { get; set; }
+        public string Role { get; set; }
+        public int UserEmployeeNumber { get; set; }
 
     }
 }

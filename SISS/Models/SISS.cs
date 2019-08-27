@@ -14,5 +14,6 @@ namespace SISS
 
         }
         public DbSet<Login> Login { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

@@ -143,10 +143,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OfficerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SISS.cs" />
   </ItemGroup>
@@ -155,15 +158,35 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\bg1.jpg" />
+    <Content Include="Content\Images\bg2.jpg" />
+    <Content Include="Content\Images\bg3.jpg" />
+    <Content Include="Content\Images\bg4.jpg" />
+    <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Sri_Lanka_Police_logo.svg" />
+    <Content Include="Content\Images\user.jpg" />
     <Content Include="Content\login.css" />
     <Content Include="Content\Layout.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\sidebar-themes.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\sass\main.scss" />
+    <Content Include="Content\sass\sidebar-themes.scss" />
+    <Content Include="Content\sass\_animation.scss" />
+    <Content Include="Content\sass\_mixin.scss" />
+    <Content Include="Content\sass\_sidebar-brand.scss" />
+    <Content Include="Content\sass\_sidebar-footer.scss" />
+    <Content Include="Content\sass\_sidebar-header.scss" />
+    <Content Include="Content\sass\_sidebar-menu.scss" />
+    <Content Include="Content\sass\_sidebar-search.scss" />
+    <Content Include="Content\sass\_sidebar-wrapper.scss" />
+    <Content Include="Content\sass\_variables.scss" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -174,6 +197,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -194,6 +218,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Officer\addOfficer.cshtml" />
+    <Content Include="Views\Officer\searchOfficer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

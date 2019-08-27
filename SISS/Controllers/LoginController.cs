@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SISS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,5 +14,46 @@ namespace SISS.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Authorize(SISS.Models.Login login)
+        {
+            using (SISS_Context db = new SISS_Context())
+            {
+                var userDetails = db.Login.Where(x => x.userName == login.userName && x.password == login.password).FirstOrDefault();
+                if (userDetails == null)
+                {
+                    login.LoginErrorMessage = "*Wrong Employee Number or Password.";//show login erroe message
+                    return View("Index", login);
+                }
+                else
+                {
+                    Session["userID"] = userDetails.Id;//retrive Userid of login user
+                    Session["userName"] = userDetails.userName.Trim();//retrive USerName of login user
+                    Session["Role"] = userDetails.Role.Trim();
+
+                    string username = Session["userName"].ToString();
+                    string role = userDetails.Role.ToString().Trim();//retrive the user role
+                   // if (role.Equals("supervisor"))//if user is supervisor goto the supervisor page
+                   // {
+                        return RedirectToAction("Index", "Home");
+                    //}
+                  
+
+
+                    //else
+                       // return RedirectToAction("Index", "Login");
+                }
+            }
+        }
+
+        public ActionResult LogOut()// logout methord
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Login");
+        }
+
+
+
     }
 }
