@@ -1,0 +1,303 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "AddSuspect";
+}
+@model SISS.Models.Suspect
+
+
+
+@using (Html.BeginForm("AddSuspect", "Suspect", FormMethod.Post, new { htmlAttributes = new { @class = "form-control", @id = "formId" } }))
+{
+
+
+
+    <script src="../../Scripts/jquery-3.3.1.min.js"></script>
+    <script src="../../Scripts/jquery.validate.min.js"></script>
+    <script src="../../Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+
+
+
+    <div class="form-horizontal" style="margin-left:7%">
+
+
+        <div class="form-group">
+            <h4>Add Suspect</h4>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="formGroupExampleInput"><strong>Full Name</strong></label>
+                    @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", @placeholder = "Full Name" })
+
+
+                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="formGroupExampleInput2"><strong>Name With Initials</strong></label>
+                    @Html.TextBoxFor(model => model.NameWithInitials, new { @class = "form-control", @placeholder = "Name With Initials" })
+
+                    @Html.ValidationMessageFor(model => model.NameWithInitials, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="formGroupExampleInput2 "><strong>Nick Name</strong></label>
+                @Html.TextBoxFor(model => model.NickName, new { @class = "form-control", @placeholder = "Nick Name" })
+                <div class="row">
+                    <div class="col-lg-10">
+                        @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-1"></div>
+            <div class="form-group col-md-5">
+                <label for="formGroupExampleInput2 "><strong>Address</strong></label>
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @placeholder = "Address" })
+                <div class="row">
+                    <div class="col-lg-10">
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="formGroupExampleInput2"><strong>NIC </strong></label>
+                @Html.TextBoxFor(model => model.NIC, new { @class = "form-control", @placeholder = "NIC Number" })
+                <div class="row">
+                    <div class="col-lg-10">
+                        @Html.ValidationMessageFor(model => model.NIC, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-1"></div>
+            <div class="form-group col-md-5">
+                <label for="formGroupExampleInput2"><strong>Telephone </strong></label>
+                @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control", @placeholder = "Telephone Number", @type = "number" })
+                <div class="row">
+                    <div class="col-lg-10">
+                        @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="formGroupExampleInput2"><strong>Birthday</strong></label>
+                @Html.TextBoxFor(model => model.BirthDay, new { @class = "form-control", @placeholder = "BirthDay", @type = "date" })
+                <div class="row">
+                    <div class="col-lg-10">
+                        @Html.ValidationMessageFor(model => model.BirthDay, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-1"></div>
+            <div class="form-group col-md-5 align-self-end">
+                <label for="formGroupExampleInput2"><strong>CurrentCity </strong></label>
+                @Html.TextBoxFor(model => model.CurrentCity, new { @class = "form-control", @placeholder = "CurrentCity", @type = "text" })
+                <div class="row">
+                    <div class="col-lg-10">
+                        @Html.ValidationMessageFor(model => model.CurrentCity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Relationship</th>
+                                <th scope="col">NIC</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Contact Number</th>
+                                <th scope="col">Discription</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+
+            <button type="button" data-toggle="modal" class="btn btn-primary" data-target="#myModal"><i class="fas fa-plus"></i> Add Relation</button>
+
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" style="width:100px" id="button" onclick="addTableData()">Save</button>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="color:green">
+                <lable style="color:red">@Html.DisplayFor(model => model.SuspectErrorMessage, "", new { @class = "text-danger" })</lable>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="color:green">
+                <lable style="color:red">@Html.DisplayFor(model => model.SuspectSuccessMessage, "", new { @class = "text-success" })</lable>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center">Modal Header</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="container">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-lg-8">
+                                        <label for="formGroupExampleInput"><strong>Full Name</strong></label>
+                                        <input class="form-control" type="text" placeholder="Name" id="name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col col-lg-4">
+                                        <label for="formGroupExampleInput form-control"><strong>Relationship</strong></label>
+                                        <select class="form-control form-control-sm" id="relation">
+                                            <option>Mother</option>
+                                            <option>Father</option>
+                                            <option>Elder Sister</option>
+                                            <option>Elder Brother</option>
+                                            <option>Younger Sister</option>
+                                            <option>Younger Brother</option>
+                                            <option>Step Mother</option>
+                                            <option>Step Father</option>
+                                            <option>Uncle</option>
+                                            <option>Grand Mother</option>
+                                            <option>Grand Father</option>
+                                            <option>Unty</option>
+                                            <option>Friend</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col col-lg-4">
+                                        <label for="formGroupExampleInput"><strong>NIC</strong></label>
+                                        <input class="form-control" type="text" placeholder="NIC" id="nic">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-lg-8">
+                                        <label for="formGroupExampleInput"><strong>Address</strong></label>
+                                        <input class="form-control" type="text" placeholder="Address" id="address">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-lg-8">
+                                        <label for="formGroupExampleInput"><strong>Contact Number</strong></label>
+                                        <input class="form-control" type="text" placeholder="Contact Number" id="content">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-lg-8">
+                                        <label for="formGroupExampleInput"><strong>Discription</strong></label>
+                                        <textarea class="form-control" type="text" placeholder="Discription" id="discription"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="addrow()"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+        function addrow() {
+            var name = $('#name')
+            var relation = $('#relation');
+            var address = $('#address');
+            var nic = $('#nic');
+            var contact = $('#contact');
+            var discription = $('#discription');
+
+            $("#table").append("<tr><td>" + name.val() + "</td><td>" + relation.val() + "</td><td>" + nic.val() + "</td><td>" + address.val() + "</td><td>" + contact.val() + "</td><td>" + discription.val() + "</td></tr>");
+            name.val('')
+            relation.val('')
+            address.val('')
+            nic.val('')
+            contact.val('')
+            discription.val('')
+        }
+        var TableData;
+        TableData = storeTblValues()
+      //  TableData = $.toJSON(TableData);
+            
+        function addTableData() {
+             
+            var data = JSON.stringify(storeTblValues()); 
+            
+            var url = '@Url.Action("saveList", "Suspect")';
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: url,
+                data: { relation: data},
+                dataType: "text",
+                success: function (data) { alert(data); }
+            });
+        }
+
+
+
+
+        function storeTblValues() {
+            var TableData = new Array();
+
+            $('.table tr').each(function (row, tr) {
+                TableData[row] = {
+                    "name": $(tr).find('td:eq(0)').text()
+                    , "relation": $(tr).find('td:eq(1)').text()
+                    , "address": $(tr).find('td:eq(3)').text()
+                    , "nic": $(tr).find('td:eq(2)').text()
+                    , "contact": $(tr).find('td:eq(4)').text()
+                    , "discription": $(tr).find('td:eq(5)').text()
+                }
+            });
+            TableData.shift();  // first row will be empty - so remove
+            return TableData;
+        }
+
+    </script>
+}
+
+

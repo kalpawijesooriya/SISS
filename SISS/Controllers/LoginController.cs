@@ -28,10 +28,11 @@ namespace SISS.Controllers
                 }
                 else
                 {
-                    Session["userID"] = userDetails.Id;//retrive Userid of login user
+                   
                     Session["userName"] = userDetails.userName.Trim();//retrive USerName of login user
                     Session["Role"] = userDetails.Role.Trim();
-
+                    Session["Name"] = db.User.Where(x => x.UserEmployeeNumber == userDetails.UserEmployeeNumber).FirstOrDefault().officerName;
+                    Session["userID"] = db.User.Where(x => x.UserEmployeeNumber == userDetails.UserEmployeeNumber).FirstOrDefault().UserEmployeeNumber;
                     string username = Session["userName"].ToString();
                     string role = userDetails.Role.ToString().Trim();//retrive the user role
                    // if (role.Equals("supervisor"))//if user is supervisor goto the supervisor page

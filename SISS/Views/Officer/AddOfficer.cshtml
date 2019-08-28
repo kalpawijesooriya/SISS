@@ -1,74 +1,178 @@
 ﻿
 @{
-    ViewBag.Title = "AddOffice";
+    /**/
+
+    ViewBag.Title = "AddOfficer";
 }
+@model SISS.Models.User
 
 
-<form>
-    <div class="form-group">
-        <label for="formGroupExampleInput"><strong>Officer Name</strong></label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-    </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput2"><strong>Officer FullName</strong></label>
-        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label for="formGroupExampleInput2 "><strong>Officer Employee Number</strong></label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="formGroupExampleInput2 "><strong>Police Station</strong></label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label for="formGroupExampleInput2"><strong>NIC </strong></label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="formGroupExampleInput2"><strong>Telephone </strong></label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label for="formGroupExampleInput2"><strong>Birthday</strong></label>
-            <input type="date" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-        </div>
-        <div class="form-group col-md-6 align-self-end">
-            <label for="formGroupExampleInput2"><strong>Joined Date </strong></label>
-            <input type="date" class="form-control " id="formGroupExampleInput2" placeholder="Another input">
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-4">
-            <label for="formGroupExampleInput2"><strong>Marrid Status</strong></label>
-            <select class="form-control" id="sel1">
-                <option>Married</option>
-                <option>Unmarried</option>
+@using (Html.BeginForm("AddUser", "Officer", FormMethod.Post, new { htmlAttributes = new { @class = "form-control", @id = "formId" } }))
+{
 
-            </select>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="formGroupExampleInput2"><strong>sex</strong></label>
-            <select class="form-control" id="sel1">
-                <option>Male</option>
-                <option>Female</option>
 
-            </select>
+
+    <script src="../../Scripts/jquery-3.3.1.min.js"></script>
+    <script src="../../Scripts/jquery.validate.min.js"></script>
+    <script src="../../Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+
+    <div class="form-horizontal" style="margin-left:7%">
+        <div class="form-group">
+            <h4>Add Employee</h4>
+
+            </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-10">
+                    <label for="formGroupExampleInput"><strong>Officer Name</strong></label>
+                    @Html.TextBoxFor(model => model.officerName, new { @class = "form-control", @placeholder = "Name" })
+
+                    @Html.ValidationMessageFor(model => model.officerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
-        <div class="form-group col-md-4">
-            <label for="formGroupExampleInput2"><strong>Designation</strong></label>
-            <select class="form-control" id="sel1">
-                <option>Costapal</option>
-                <option>DIG</option>
-            </select>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <label for="formGroupExampleInput2"><strong>Officer FullName</strong></label>
+                        @Html.TextBoxFor(model => model.officerFullName, new { @class = "form-control", @placeholder = "Full Name" })
+
+                        @Html.ValidationMessageFor(model => model.officerFullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="formGroupExampleInput2 "><strong>Officer Employee Number</strong></label>
+                    @Html.TextBoxFor(model => model.UserEmployeeNumber, new { @class = "form-control", @placeholder = "Employee Number" })
+                    <div class="row">
+                        <div class="col-lg-10">
+                            @Html.ValidationMessageFor(model => model.UserEmployeeNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-1"></div>
+                <div class="form-group col-md-5">
+                    <label for="formGroupExampleInput2 "><strong>Police Station</strong></label>
+                    @Html.TextBoxFor(model => model.officerPoliceStation, new { @class = "form-control", @placeholder = "Police Station" })
+                    <div class="row">
+                        <div class="col-lg-10">
+                            @Html.ValidationMessageFor(model => model.officerPoliceStation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="formGroupExampleInput2"><strong>NIC </strong></label>
+                    @Html.TextBoxFor(model => model.officerNIC, new { @class = "form-control", @placeholder = "NIC Number" })
+                    <div class="row">
+                        <div class="col-lg-10">
+                            @Html.ValidationMessageFor(model => model.officerNIC, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-1"></div>
+                <div class="form-group col-md-5">
+                    <label for="formGroupExampleInput2"><strong>Telephone </strong></label>
+                    @Html.TextBoxFor(model => model.officerTelephone, new { @class = "form-control", @placeholder = "Telephone Number", @type = "number" })
+                    <div class="row">
+                        <div class="col-lg-10">
+                            @Html.ValidationMessageFor(model => model.officerTelephone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="formGroupExampleInput2"><strong>Birthday</strong></label>
+                    @Html.TextBoxFor(model => model.officerBirthday, new { @class = "form-control", @placeholder = "BirthDay", @type = "date" })
+                    <div class="row">
+                        <div class="col-lg-10">
+                            @Html.ValidationMessageFor(model => model.officerBirthday, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-1"></div>
+                <div class="form-group col-md-5 align-self-end">
+                    <label for="formGroupExampleInput2"><strong>Joined Date </strong></label>
+                    @Html.TextBoxFor(model => model.officerJoindDate, new { @class = "form-control", @placeholder = "Joined Date", @type = "date" })
+                    <div class="row">
+                        <div class="col-lg-10">
+                            @Html.ValidationMessageFor(model => model.officerJoindDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="formGroupExampleInput2"><strong>Marrid Status</strong></label>
+                    @Html.DropDownList("officerMarrageStatus",
+                      new SelectList(Enum.GetValues(typeof(MarridStatus))),
+                      new { @class = "form-control" })
+                    <div class="row">
+                        <div class="col-lg-10">
+                            @Html.ValidationMessageFor(model => model.officerMarrageStatus, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-1"></div>
+                <div class="form-group col-md-5">
+                    <label><strong>Gender</strong></label>
+                    @Html.DropDownList("officerGender",
+                             new SelectList(Enum.GetValues(typeof(Gender))),
+                             new { @class = "form-control" })
+                    <div class="row">
+                        <div class="col-lg-10">
+                            @Html.ValidationMessageFor(model => model.officerGender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-1"></div>
+                <div class="form-group col-md-5">
+                    <label for="formGroupExampleInput2"><strong>Designation</strong></label>
+                    @Html.DropDownList("officerDesignation",
+                            new SelectList(Enum.GetValues(typeof(Designation))),
+                            new { @class = "form-control" })
+                    <div class="row">
+                        <div class="col-lg-10">
+                            @Html.ValidationMessageFor(model => model.officerDesignation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-primary" style="width:100px" id="button">Save</button>
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="color:green">
+                    <lable style="color:red">@Html.DisplayFor(model => model.UserErrorMessage, "", new { @class = "text-danger" })</lable>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="color:green">
+                    <lable style="color:red">@Html.DisplayFor(model => model.UserSuccessMessage, "", new { @class = "text-success" })</lable>
+
+                </div>
+            </div>
+
+            <script>
+                var formObj = new ej.inputs.FormValidater('#formId');
+                formObj.validate();
+                $(document).ready(function () {
+                    // Listen to click event on the submit button
+                    $('#button').click(function (e) {
+                        e.preventDefault();
+                    });
+                });
+            </script>
         </div>
-    </div>
-    
-</form>
+        }
+
 

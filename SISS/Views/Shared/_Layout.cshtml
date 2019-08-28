@@ -42,10 +42,10 @@
                         </div>
                         <div class="user-info">
                             <span class="user-name">
-                                Jhon
-                                <strong>Smith</strong>
+                               
+                                <strong> @Session["Name"]</strong>
                             </span>
-                            <span class="user-role">Administrator</span>
+                            <span class="user-role">@Session["Role"]</span>
                             <span class="user-status">
                                 <i class="fa fa-circle"></i>
                                 <span>Online</span>
@@ -107,10 +107,10 @@
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a href="#">Add Suspect Detals</a>
+                                            <a href="@Url.Action("AddSuspect","Suspect")">Add Suspect Detals</a>
                                         </li>
                                         <li>
-                                            <a href="#">Search Suspects</a>
+                                            <a href="@Url.Action("searchSuspect","Suspect")">Search Suspects</a>
                                         </li>
                                         
                                     </ul>
@@ -318,7 +318,7 @@
                         </div>
                     </div>
                     <div>
-                        <a href="#">
+                        <a href="@Url.Action("LogOut","Login")">
                             <i class="fa fa-power-off"></i>
                         </a>
                     </div>
@@ -351,7 +351,7 @@
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
 
-    <script src="js/main.js"></script>
+
    
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -362,7 +362,7 @@
 
 
 
-    <script src="~/Scripts/main.js"></script>
+    <script src="../../Scripts/main.js"></script>
 
 
 </body>

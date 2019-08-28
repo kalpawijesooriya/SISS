@@ -141,6 +141,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\SuspectController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OfficerController.cs" />
@@ -149,6 +150,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Relation.cs" />
+    <Compile Include="Models\Suspect.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SISS.cs" />
@@ -173,6 +176,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\addRelation.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\sass\main.scss" />
@@ -220,6 +224,8 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Officer\addOfficer.cshtml" />
     <Content Include="Views\Officer\searchOfficer.cshtml" />
+    <Content Include="Views\Suspect\AddSuspect.cshtml" />
+    <Content Include="Views\Suspect\SearchSuspect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
