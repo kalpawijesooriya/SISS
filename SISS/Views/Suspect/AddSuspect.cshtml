@@ -8,9 +8,8 @@
 
 
 
-@using (Html.BeginForm("AddSuspect", "Suspect", FormMethod.Post, new { htmlAttributes = new { @class = "form-control", @id = "formId" } }))
+@using (Html.BeginForm( new { htmlAttributes = new { @class = "form-control required", @id = "formId" } }))
 {
-
 
 
     <script src="../../Scripts/jquery-3.3.1.min.js"></script>
@@ -31,9 +30,8 @@
             <div class="row">
                 <div class="col-md-10">
                     <label for="formGroupExampleInput"><strong>Full Name</strong></label>
-                    @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", @placeholder = "Full Name" })
-
-
+                    @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", @required = "required",@placeholder = "Full Name", @id = "FullName" })
+                  
                     @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -42,7 +40,7 @@
             <div class="row">
                 <div class="col-md-10">
                     <label for="formGroupExampleInput2"><strong>Name With Initials</strong></label>
-                    @Html.TextBoxFor(model => model.NameWithInitials, new { @class = "form-control", @placeholder = "Name With Initials" })
+                    @Html.TextBoxFor(model => model.NameWithInitials, new { @class = "form-control", @placeholder = "Name With Initials", @id = "Initials" })
 
                     @Html.ValidationMessageFor(model => model.NameWithInitials, "", new { @class = "text-danger" })
                 </div>
@@ -51,7 +49,7 @@
         <div class="row">
             <div class="form-group col-md-5">
                 <label for="formGroupExampleInput2 "><strong>Nick Name</strong></label>
-                @Html.TextBoxFor(model => model.NickName, new { @class = "form-control", @placeholder = "Nick Name" })
+                @Html.TextBoxFor(model => model.NickName, new { @class = "form-control", @placeholder = "Nick Name", @id = "Nick" })
                 <div class="row">
                     <div class="col-lg-10">
                         @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
@@ -61,7 +59,7 @@
             <div class="form-group col-md-1"></div>
             <div class="form-group col-md-5">
                 <label for="formGroupExampleInput2 "><strong>Address</strong></label>
-                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @placeholder = "Address" })
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @placeholder = "Address", @id = "Address" })
                 <div class="row">
                     <div class="col-lg-10">
                         @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
@@ -72,7 +70,7 @@
         <div class="row">
             <div class="form-group col-md-5">
                 <label for="formGroupExampleInput2"><strong>NIC </strong></label>
-                @Html.TextBoxFor(model => model.NIC, new { @class = "form-control", @placeholder = "NIC Number" })
+                @Html.TextBoxFor(model => model.NIC, new { @class = "form-control", @placeholder = "NIC Number", @id = "NICNum" })
                 <div class="row">
                     <div class="col-lg-10">
                         @Html.ValidationMessageFor(model => model.NIC, "", new { @class = "text-danger" })
@@ -82,7 +80,7 @@
             <div class="form-group col-md-1"></div>
             <div class="form-group col-md-5">
                 <label for="formGroupExampleInput2"><strong>Telephone </strong></label>
-                @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control", @placeholder = "Telephone Number", @type = "number" })
+                @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control", @placeholder = "Telephone Number", @type = "number", @id = "Telephone" })
                 <div class="row">
                     <div class="col-lg-10">
                         @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
@@ -94,7 +92,7 @@
         <div class="row">
             <div class="form-group col-md-5">
                 <label for="formGroupExampleInput2"><strong>Birthday</strong></label>
-                @Html.TextBoxFor(model => model.BirthDay, new { @class = "form-control", @placeholder = "BirthDay", @type = "date" })
+                @Html.TextBoxFor(model => model.BirthDay, new { @class = "form-control", @placeholder = "BirthDay", @type = "date", @id = "BirthDay" })
                 <div class="row">
                     <div class="col-lg-10">
                         @Html.ValidationMessageFor(model => model.BirthDay, "", new { @class = "text-danger" })
@@ -104,7 +102,7 @@
             <div class="form-group col-md-1"></div>
             <div class="form-group col-md-5 align-self-end">
                 <label for="formGroupExampleInput2"><strong>CurrentCity </strong></label>
-                @Html.TextBoxFor(model => model.CurrentCity, new { @class = "form-control", @placeholder = "CurrentCity", @type = "text" })
+                @Html.TextBoxFor(model => model.CurrentCity, new { @class = "form-control", @placeholder = "CurrentCity", @type = "text", @id = "CurrentCity" })
                 <div class="row">
                     <div class="col-lg-10">
                         @Html.ValidationMessageFor(model => model.CurrentCity, "", new { @class = "text-danger" })
@@ -137,7 +135,7 @@
 
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary" style="width:100px" id="button" onclick="addTableData()">Save</button>
+            <button type="submit" class="btn btn-primary" style="width:100px" id="subbutton"  >Save</button>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10" style="color:green">
@@ -212,7 +210,7 @@
                                 <div class="row">
                                     <div class="col col-lg-8">
                                         <label for="formGroupExampleInput"><strong>Contact Number</strong></label>
-                                        <input class="form-control" type="text" placeholder="Contact Number" id="content">
+                                        <input class="form-control" type="number" placeholder="Contact Number" id="contact">
                                     </div>
                                 </div>
                             </div>
@@ -250,6 +248,8 @@
             var contact = $('#contact');
             var discription = $('#discription');
 
+
+
             $("#table").append("<tr><td>" + name.val() + "</td><td>" + relation.val() + "</td><td>" + nic.val() + "</td><td>" + address.val() + "</td><td>" + contact.val() + "</td><td>" + discription.val() + "</td></tr>");
             name.val('')
             relation.val('')
@@ -261,21 +261,53 @@
         var TableData;
         TableData = storeTblValues()
       //  TableData = $.toJSON(TableData);
+        $("#subbutton").on("click", function (e) {
             
-        function addTableData() {
-             
-            var data = JSON.stringify(storeTblValues()); 
-            
-            var url = '@Url.Action("saveList", "Suspect")';
-            $.ajax({
-                type: 'POST',
-                async: false,
-                url: url,
-                data: { relation: data},
-                dataType: "text",
-                success: function (data) { alert(data); }
-            });
-        }
+          var FullName = $('#FullName').val();
+            var Initials = $('#Initials').val();
+            var Nick = $('#Nick').val();
+            var Address = $('#Address').val();
+            var NICNum = $('#NICNum').val();
+            var Telephone = $('#Telephone').val();
+            var BirthDay = $('#BirthDay').val();
+            var CurrentCity = $('#CurrentCity').val();
+
+            if (FullName === "" || Initials === "" || Nick === "" || Address === "" || NICNum === "" || Telephone === "" || BirthDay === "" || CurrentCity === "") {
+                
+            } else {
+                e.preventDefault();
+            var SuspectData = new Array();
+            SuspectData[0] = {
+                "FullName": FullName,
+                "Initials": Initials,
+                "Nick": Nick,
+                "Address": Address,
+                "NICNum": NICNum,
+                "Telephone": parseInt(Telephone, 10),
+                "CurrentCity": CurrentCity,
+                "BirthDay": BirthDay
+
+            }
+             var data = JSON.stringify(storeTblValues());
+             var Suspect = JSON.stringify(SuspectData);
+                var url = '@Url.Action("saveList", "Suspect")';
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: url,
+                    data: { relation: data, Suspects: Suspect},
+                    dataType: "text",
+                    success: function (data) { alert(data); }
+                });
+
+
+            }
+           
+
+         
+        });
+
+     
 
 
 
@@ -291,10 +323,14 @@
                     , "nic": $(tr).find('td:eq(2)').text()
                     , "contact": $(tr).find('td:eq(4)').text()
                     , "discription": $(tr).find('td:eq(5)').text()
+
                 }
             });
             TableData.shift();  // first row will be empty - so remove
             return TableData;
+
+
+
         }
 
     </script>

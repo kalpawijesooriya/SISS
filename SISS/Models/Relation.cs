@@ -12,12 +12,13 @@ namespace SISS.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RelationID { get; set; }
-        public int FullName { get; set; }
-        public int RelationShip { get; set; }
-        public int Addres { get; set; }
-        public int NIC { get; set; }
+        public string FullName { get; set; }
+        public string RelationShip { get; set; }
+        public string Addres { get; set; }
+        public string NIC { get; set; }
         public int ContactNumber { get; set; }
-        public int Discription { get; set; }
+        public string Discription { get; set; }
+        public int SuspectID { get; set; }
         [ForeignKey("SuspectID")]
         public Suspect Suspect { get; set; }
     }

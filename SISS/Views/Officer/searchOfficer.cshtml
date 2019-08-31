@@ -3,5 +3,514 @@
     ViewBag.Title = "searchOfficer";
 }
 
-<h2>searchOfficer</h2>
 
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<!-- Custom rounded search bars with input group -->
+<form>
+    <div class="p-1 bg-light rounded  shadow-sm mb-4 container">
+        <div class="input-group row spe">
+            <input type="search" id="myInput" name="myCountry" placeholder="Search..." aria-describedby="button-addon1" class="form-control border-0 bg-light">
+
+            <div class="input-group-append">
+                <button id="subbutton" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+            </div>
+
+        </div>
+        <div class="autocomplete" id="auto">
+
+        </div>
+    </div>
+
+
+</form>
+<div class="container">
+    <div class="row" id="card">
+
+
+
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" id="myModalHorizontal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">
+                    Modal title
+                </h4>
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <input type="hidden" class="form-control"
+                       id="id" placeholder="Police Station" />
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="inputEmail3">FullName</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="fullName" placeholder="FullName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="inputPassword3">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="name" placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="inputPassword3">DOB</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="dob" placeholder="DOB" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="inputPassword3">Police Station</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="station" placeholder="Police Station" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="inputPassword3">MarageStatus</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="marageStatus" placeholder="MarageStatus" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="inputPassword3">Gender</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="gender" placeholder="Gender" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="inputPassword3">Joined Date</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="joindDate" placeholder="Joined Date" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="inputPassword3">NIC</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="nic" placeholder="NIC" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="inputPassword3">Designation</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="designation" placeholder="Designation" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="inputPassword3">Telephone</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   id="telephone" placeholder="Telephone" />
+                        </div>
+                    </div>
+
+                </form>
+
+
+
+
+
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" onclick="updateUser()">
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Button trigger modal -->
+
+
+<script>
+    function autocomplete(inp, arr) {
+        /*the autocomplete function takes two arguments,
+        the text field element and an array of possible autocompleted values:*/
+        var currentFocus;
+        /*execute a function when someone writes in the text field:*/
+        inp.addEventListener("input", function (e) {
+            var a, b, i, val = this.value;
+            /*close any already open lists of autocompleted values*/
+            closeAllLists();
+            if (!val) { return false; }
+            currentFocus = -1;
+            /*create a DIV element that will contain the items (values):*/
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+            /*append the DIV element as a child of the autocomplete container:*/
+            document.getElementById("auto").parentNode.appendChild(a);
+            /*for each item in the array...*/
+            for (i = 0; i < arr.length; i++) {
+                /*check if the item starts with the same letters as the text field value:*/
+                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                    /*create a DIV element for each matching element:*/
+                    b = document.createElement("DIV");
+                    b.setAttribute("class", "row");
+                    /*make the matching letters bold:*/
+                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                    b.innerHTML += arr[i].substr(val.length);
+                    /*insert a input field that will hold the current array item's value:*/
+                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                    /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function (e) {
+                        /*insert the value for the autocomplete text field:*/
+                        inp.value = this.getElementsByTagName("input")[0].value;
+                        /*close the list of autocompleted values,
+                        (or any other open lists of autocompleted values:*/
+                        closeAllLists();
+                    });
+                    a.appendChild(b);
+                }
+            }
+        });
+        /*execute a function presses a key on the keyboard:*/
+        inp.addEventListener("keydown", function (e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+        function addActive(x) {
+            /*a function to classify an item as "active":*/
+            if (!x) return false;
+            /*start by removing the "active" class on all items:*/
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            /*add class "autocomplete-active":*/
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+        function removeActive(x) {
+            /*a function to remove the "active" class from all autocomplete items:*/
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+        function closeAllLists(elmnt) {
+            /*close all autocomplete lists in the document,
+            except the one passed as an argument:*/
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+        /*execute a function when someone clicks in the document:*/
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+
+    /*An array containing all the country names in the world:*/
+
+    var countries = new Array();
+    /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+
+
+    $("#myInput").keydown(function (event) {
+        var Key = $('#myInput').val();
+           var url = '@Url.Action("findOfficer", "Officer")';
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: url,
+                    data: { KeyWord: Key},
+                    dataType: "text",
+                    success: function (data) {
+                        showResults(JSON.parse(data));
+                    }
+                });
+});
+    function showResults(data)
+    {
+        //
+        countries=[]
+        data.forEach(function (ele)
+        {
+            countries.push(ele.officerFullName)
+            countries.push(ele.officerBirthday)
+            countries.push(ele.officerDesignation)
+            countries.push(ele.officerJoindDate)
+            countries.push(ele.officerGender)
+            countries.push(ele.officerMarrageStatus)
+            countries.push(ele.officerPoliceStation)
+            countries.push(ele.officerName)
+            countries.push(ele.officerNIC)
+            countries.push(ele.UserEmployeeNumber)
+
+        })
+        autocomplete(document.getElementById("myInput"), countries);
+
+
+
+
+    }
+
+    $("#subbutton").on("click", function (e) {
+        e.preventDefault();
+      var word=  $("#myInput").val()
+         var url = '@Url.Action("findOfficer", "Officer")';
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: url,
+                    data: { KeyWord: word},
+                    dataType: "text",
+                    success: function (data) {
+                        createcard(JSON.parse(data));
+                    }
+        });
+
+
+        function createcard(data) {
+            $("#card").empty();
+            data.forEach(function (ele) {
+                var card = '<div class="col-6 col-md-4" style="margin-bottom:20px"> <div class="card" style="width: 18rem;"><img class="card-img-top" src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg" alt="Card image cap"><div class="card-body"><h5 class="card-title" >' + ele.officerFullName + '</h5></div><ul class="list-group list-group-flush"><li class="list-group-item"><strong>Police Station : </strong> ' + ele.officerPoliceStation + '</li><li class="list-group-item"><strong>Designation : </strong> ' + ele.officerDesignation + '</li><li class="list-group-item"><strong>Contact : </strong> ' + ele.officerTelephone + '</li></ul ><div class="card-body"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalHorizontal" data-id="' + ele.UserEmployeeNumber + '" onclick="myfunction(this)">Update</button><button type="button" class="btn btn-danger">Delete</button><button type="button" class="btn btn-info"> More</button></a></div></div></div>'
+                $("#card").append(card)
+            })
+
+        }
+
+
+    
+    })
+    function myfunction(param) {
+        var id = $(param).data('id');
+        
+        var url = '@Url.Action("findUser", "Officer")';
+        var id = $(param).data('id');
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: url,
+            data: { userid: id },
+            dataType: "text",
+            success: function (data) {
+                alert(data)
+                addDatatoModel(JSON.parse(data));
+            }
+        });
+
+        function addDatatoModel(data) {
+            data.forEach(function (ele) {
+                $('#id').val(ele.UserEmployeeNumber);
+                $('#name').val(ele.officerName);
+                $('#fullName').val(ele.officerFullName);
+                $('#dob').val(ele.officerBirthday);
+                $('#station').val(ele.officerPoliceStation);
+                $('#marageStatus').val(ele.officerMarrageStatus);
+                $('#telephone').val(ele.officerTelephone);
+                $('#joindDate').val(ele.officerJoindDate);
+                $('#designation').val(ele.officerDesignation);
+                $('#nic').val(ele.officerNIC);
+                $('#gender').val(ele.officerGender);
+                
+            })
+        }
+    }
+
+    function updateUser() {
+        var fullName = $('#fullName').val();
+        var name = $('#name').val();
+        var marageStatus = $('#marageStatus').val();
+        var designation = $('#designation').val();
+        var nic = $('#nic').val();
+        var telephone = $('#telephone').val();
+        var dob = $('#dob').val();
+        var station = $('#station').val();
+        var gender = $('#gender').val();
+        var joindDate= $('#joindDate').val();
+        var id = $('#id').val();
+        var UserData = new Array();
+
+        UserData[0] = {
+            "FullName": fullName,
+            "name": name,
+            "designation": designation,
+            "marageStatus": marageStatus,
+            "nic": nic,
+            "telephone": parseInt(telephone, 10),
+            "station": station,
+            "dob": dob,
+            "gender": gender,
+            "joindDate": joindDate,
+            "id":id
+
+        }
+
+        var data = JSON.stringify(UserData);
+         var url = '@Url.Action("updateUser", "Officer")';
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: url,
+            data: { user: data },
+            dataType: "text",
+            success: function (data) {
+                alert(data)
+                addDatatoModel(JSON.parse(data));
+            }
+        });
+
+
+    }
+
+
+
+</script>
+
+
+
+<style>
+
+
+
+    /*the container must be positioned relative:*/
+    .autocomplete {
+        position: absolute;
+        display: inline-block;
+        padding: 10px;
+    }
+
+
+
+    input {
+        border: 1px solid transparent;
+        padding: 10px;
+        font-size: 16px;
+        color: white;
+        border: 0;
+        outline: 0;
+        background: none;
+        caret-color: red;
+    }
+
+       
+
+        input[type=submit] {
+            background-color: DodgerBlue;
+            color: #fff;
+            cursor: pointer;
+        }
+
+    .autocomplete-items {
+        padding: 10px;
+        border: none;
+        padding: 10px;
+        z-index: 99;
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #f8f9fa;
+        border-top: 1px solid #e7e7e7;
+    }
+
+        .autocomplete-items div {
+            margin: 10px;
+            cursor: pointer;
+            background-color: #f8f9fa;
+            color: #000;
+        }
+
+            /*when hovering an item:*/
+            .autocomplete-items div:hover {
+                background-color: #e9e9e9;
+            }
+
+    /*when navigating through the items using the arrow keys:*/
+    .autocomplete-active {
+        background-color: DodgerBlue !important;
+        color: #ffffff;
+    }
+
+
+
+    .form-control:focus {
+        box-shadow: none;
+    }
+
+    .form-control-underlined {
+        border-width: 0;
+        border-bottom-width: 1px;
+        border-radius: 0;
+        padding-left: 0;
+    }
+
+    .spe {
+        margin-left: 10px;
+        margin-right: 100px;
+    }
+
+    button {
+        margin-right: 10px;
+    }
+</style>

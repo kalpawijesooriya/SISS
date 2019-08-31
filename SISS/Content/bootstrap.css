@@ -6762,4 +6762,8 @@ button.close {
     color: #fff;
     background-color: #28a745;
 }
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+}
 /*# sourceMappingURL=bootstrap.css.map */

@@ -33,6 +33,8 @@ namespace SISS.Models
         public string SuspectErrorMessage { get; set; }
         [NotMapped]
         public string SuspectSuccessMessage { get; set; }
+        [NotMapped]
+        public string lastInsertedVideoId { get; set; }
 
     }
 }

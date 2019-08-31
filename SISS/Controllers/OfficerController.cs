@@ -1,4 +1,5 @@
-﻿using SISS.Models;
+﻿using Newtonsoft.Json.Linq;
+using SISS.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,72 @@ namespace SISS.Controllers
                
                 return RedirectToAction("addOfficer", "Officer");
             }
+        }
+        [HttpPost]
+        public ActionResult findOfficer(String KeyWord)
+        {
+            using (SISS_Context db = new SISS_Context())
+            {
+                string x = KeyWord.Replace("\"", "");
+                try {
+                    string query = "SELECT * FROM Users WHERE CONCAT(officerFullName,officerBirthday,officerDesignation,officerJoindDate,officerGender,officerMarrageStatus,officerPoliceStation,officerName,officerNIC,UserEmployeeNumber) LIKE '%"+ x + "%' ORDER BY officerFullName ASC";
+                    var searchData = db.Database.SqlQuery<User>(query).ToList();
+                   
+                    return Json(searchData);
+
+                }
+                catch (Exception e)
+                {
+                    return Json(e);
+                }
+                  
+            }
+        }
+
+        [HttpPost]
+        public ActionResult findUser(int userid)
+        {
+            using (SISS_Context db = new SISS_Context())
+            {
+                
+                try
+                {
+                    string query = "SELECT * FROM Users WHERE UserEmployeeNumber='"+ userid+"'";
+                    var searchData = db.Database.SqlQuery<User>(query).ToList();
+                    return Json(searchData);
+
+                }
+                catch (Exception e)
+                {
+                    return Json(e);
+                }
+            }
+
+        }
+        [HttpPost]
+        public ActionResult updateUser(string user)
+        {
+            JArray userList = JArray.Parse(user) as JArray;
+            using (SISS_Context db = new SISS_Context())
+            {
+                try
+                {
+         
+
+                    foreach (JObject item in userList)
+                    {
+                        string query = "UPDATE Users SET officerFullName = '"+ item["FullName"] + "', officerName = '"+ item["name"] + "', officerBirthday = '"+ item["dob"] + "',officerDesignation = '"+ item["designation"] + "',officerGender = '"+ item["gender"] + "',officerJoindDate = '"+ item["joindDate"] + "',officerMarrageStatus = '"+ item["marageStatus"] + "',officerPoliceStation = '"+ item["station"] + "',officerNIC = '"+ item["nic"] + "',officerTelephone = '"+ Int32.Parse(item["telephone"].ToString()) + "' WHERE UserEmployeeNumber='"+ item["id"] + "'";
+                        db.Database.ExecuteSqlCommand(query);
+                        
+                    }
+                }
+                catch (Exception e)
+                {
+                    return this.Json(e, JsonRequestBehavior.AllowGet);
+
+                }
+            }
+            return Json("User Data Updated!", JsonRequestBehavior.AllowGet);
         }
     }
 }
