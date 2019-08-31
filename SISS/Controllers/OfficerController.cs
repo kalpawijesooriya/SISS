@@ -81,14 +81,16 @@ namespace SISS.Controllers
         }
 
         [HttpPost]
-        public ActionResult findUser(int userid)
+        public ActionResult findUser(string userid)
         {
+            String str2 = userid.Replace("\"", "");
+
             using (SISS_Context db = new SISS_Context())
             {
                 
                 try
                 {
-                    string query = "SELECT * FROM Users WHERE UserEmployeeNumber='"+ userid+"'";
+                    string query = "SELECT * FROM Users WHERE UserEmployeeNumber='"+ str2 + "'" ;
                     var searchData = db.Database.SqlQuery<User>(query).ToList();
                     return Json(searchData);
 
@@ -124,6 +126,30 @@ namespace SISS.Controllers
                 }
             }
             return Json("User Data Updated!", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult deleteUser(int userId)
+        {
+            using (SISS_Context db = new SISS_Context())
+            {
+                try
+                {
+
+
+                   
+                        string query = "DELETE FROM Users WHERE UserEmployeeNumber='" + userId + "'";
+                        db.Database.ExecuteSqlCommand(query);
+
+                    
+                }
+                catch (Exception e)
+                {
+                    return this.Json(e, JsonRequestBehavior.AllowGet);
+
+                }
+            }
+            return Json("User Data Deleted!", JsonRequestBehavior.AllowGet);
         }
     }
 }

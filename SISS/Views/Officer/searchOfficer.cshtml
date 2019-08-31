@@ -17,7 +17,7 @@
             <input type="search" id="myInput" name="myCountry" placeholder="Search..." aria-describedby="button-addon1" class="form-control border-0 bg-light">
 
             <div class="input-group-append">
-                <button id="subbutton" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+                <button id="subbutton" type="button" class="btn btn-link text-primary" onclick="showUsers()"><i class="fa fa-search"></i></button>
             </div>
 
         </div>
@@ -45,7 +45,7 @@
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">
-                    Modal title
+                    Officer Details
                 </h4>
                 <button type="button" class="close"
                         data-dismiss="modal">
@@ -163,7 +163,8 @@
         </div>
     </div>
 </div>
-
+<div id="showerror">
+</div>
 
 
 
@@ -314,8 +315,8 @@
 
     }
 
-    $("#subbutton").on("click", function (e) {
-        e.preventDefault();
+    function showUsers() {
+        
       var word=  $("#myInput").val()
          var url = '@Url.Action("findOfficer", "Officer")';
                 $.ajax({
@@ -333,20 +334,21 @@
         function createcard(data) {
             $("#card").empty();
             data.forEach(function (ele) {
-                var card = '<div class="col-6 col-md-4" style="margin-bottom:20px"> <div class="card" style="width: 18rem;"><img class="card-img-top" src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg" alt="Card image cap"><div class="card-body"><h5 class="card-title" >' + ele.officerFullName + '</h5></div><ul class="list-group list-group-flush"><li class="list-group-item"><strong>Police Station : </strong> ' + ele.officerPoliceStation + '</li><li class="list-group-item"><strong>Designation : </strong> ' + ele.officerDesignation + '</li><li class="list-group-item"><strong>Contact : </strong> ' + ele.officerTelephone + '</li></ul ><div class="card-body"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalHorizontal" data-id="' + ele.UserEmployeeNumber + '" onclick="myfunction(this)">Update</button><button type="button" class="btn btn-danger">Delete</button><button type="button" class="btn btn-info"> More</button></a></div></div></div>'
+                var card = '<div class="col-6 col-md-4" style="margin-bottom:20px"> <div class="card" style="width: 18rem;"><img class="card-img-top" src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg" alt="Card image cap"><div class="card-body"><h5 class="card-title" >' + ele.officerFullName + '</h5></div><ul class="list-group list-group-flush"><li class="list-group-item"><strong>Police Station : </strong> ' + ele.officerPoliceStation + '</li><li class="list-group-item"><strong>Designation : </strong> ' + ele.officerDesignation + '</li><li class="list-group-item"><strong>Contact : </strong> ' + ele.officerTelephone + '</li></ul ><div class="card-body"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalHorizontal" data-id="' + ele.UserEmployeeNumber + '" onclick="myfunction(this)">Update</button><button type="button" class="btn btn-danger" data-id="' + ele.UserEmployeeNumber + '" onclick="DeleteUser(this)">Delete</button><button type="button" class="btn btn-info"> More</button></a></div></div></div>'
                 $("#card").append(card)
             })
 
         }
 
 
-    
-    })
+
+    }
     function myfunction(param) {
-        var id = $(param).data('id');
-        
+
+
         var url = '@Url.Action("findUser", "Officer")';
         var id = $(param).data('id');
+    
         $.ajax({
             type: 'POST',
             async: false,
@@ -354,8 +356,11 @@
             data: { userid: id },
             dataType: "text",
             success: function (data) {
-                alert(data)
+
                 addDatatoModel(JSON.parse(data));
+            }, error: function (request, status, error) {
+                $("#showerror").append(request.responseText)
+               // alert(request.responseText);
             }
         });
 
@@ -372,7 +377,7 @@
                 $('#designation').val(ele.officerDesignation);
                 $('#nic').val(ele.officerNIC);
                 $('#gender').val(ele.officerGender);
-                
+
             })
         }
     }
@@ -415,11 +420,27 @@
             data: { user: data },
             dataType: "text",
             success: function (data) {
-                alert(data)
-                addDatatoModel(JSON.parse(data));
+                showUsers()
+                $('#myModalHorizontal').modal('toggle');
             }
         });
 
+
+    }
+    function DeleteUser(param) {
+        var id = $(param).data('id');
+         var url = '@Url.Action("deleteUser", "Officer")';
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: url,
+            data: { userId: id },
+            dataType: "text",
+            success: function (data) {
+                showUsers()
+
+            }
+        });
 
     }
 
@@ -453,7 +474,7 @@
         caret-color: red;
     }
 
-       
+
 
         input[type=submit] {
             background-color: DodgerBlue;
