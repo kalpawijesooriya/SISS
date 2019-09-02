@@ -1,0 +1,788 @@
+﻿@model SISS.Models.User
+@{
+    ViewBag.Title = "AddCrimeRecord";
+}
+<link href="~/Content/select2-min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<div style="padding:20px;background-color:lavender;border-radius:10px">
+    <input type="hidden" class="form-control"
+           id="id" placeholder="Police Station" />
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label"
+                   for="inputEmail3"><strong>Complane Name</strong></label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control"
+                       id="ComplaneName" placeholder="Complane Name" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"
+                   for="inputEmail3"><strong>Complane Date</strong></label>
+            <div class="col-sm-12">
+                <input type="date" class="form-control"
+                       id="ComplaneDate" placeholder="Complane Date" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"
+                   for="inputPassword3"><strong>Complane Time</strong></label>
+            <div class="col-sm-12">
+                <input type="time" class="form-control"
+                       id="ComplaneTime" placeholder="Complane Time" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"
+                   for="inputPassword3"><strong>Complaniant Name</strong></label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control"
+                       id="ComplaniantName" placeholder="Complaniant Name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"
+                   for="inputPassword3"><strong>Complaniant Address</strong></label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control"
+                       id="ComplaniantAddress" placeholder="Complaniant Address" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"
+                   for="inputPassword3"><strong>Complaniant Contact Number</strong></label>
+            <div class="col-sm-12">
+                <input type="number" class="form-control"
+                       id="ComplaniantContact" placeholder="Complaniant Contact Number" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"
+                   for="inputPassword3"><strong>Complaniant title</strong></label>
+            <div class="col-sm-12">
+                <select type="text" class="form-control" id="ComplaniantTitle" placeholder="Complaniant title">
+                    <option>Mr.</option>
+                    <option>Ms.</option>
+                    <option>Mrs.</option>
+                    <option>Dr.</option>
+                    <option>Ven.</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"
+                   for="inputPassword3"><strong>Statement</strong></label>
+            <div class="col-sm-12">
+                <textarea type="text" class="form-control"
+                          id="Statement" placeholder="Statement"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"
+                   for="inputPassword3"><strong>Ploice Station</strong></label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control"
+                       id="policeStation" placeholder="Ploice Station" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"
+                   for="inputPassword3"><strong>crime Type</strong></label>
+            <div class="col-sm-12">
+                <select class="js-example-placeholder-single js-states form-control" id="crimeType" name="crime Type">
+                    <option>type 1</option>
+                    <option>type 2</option>
+                    <option>type 3</option>
+                    <option>type 4</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"
+                   for="inputPassword3"><strong>Location of the Crime</strong></label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control"
+                       id="location" placeholder="Location of the Crime" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"
+                   for="inputPassword3"><strong>Upload Writtern Statments :</strong></label>
+            <div class="col-sm-2">
+                <input type="file"
+                       id="FileUpload" multiple>
+            </div>
+        </div>
+       
+    </form>
+</div>
+
+<div style="padding:20px;background-color:lavender;border-radius:10px;margin-top:5%">
+    <div class="row" style="margin-top:20px;">
+        <div class="col-sm-2">
+            <label for="selectline"><strong>Select Officer</strong></label>
+        </div>
+        <div class="col-sm-4">
+            <select class="js-example-placeholder-single js-states form-control" id="selectUser" name="selectline">
+                <option></option>
+                @foreach (var item in ViewBag.userList)
+                {
+                    <option value="@item.UserEmployeeNumber">@item.UserEmployeeNumber-@item.officerName</option>
+                }
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-success" onclick="addrow()" style="padding-left:25px;padding-left:25px;width:100px"><i class="fas fa-angle-double-right"></i></button>
+        </div>
+        <div class="col-sm-4">
+            <table class="tableOfficer table">
+                <thead>
+                    <tr>
+                        `
+                        <th scope="col" class="text-center">Officer List</th>
+
+                    </tr>
+                </thead>
+                <tbody id="table"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div style="padding:20px;background-color:lavender;border-radius:10px;margin-top:5%">
+    <div class="form-group">
+        <label class="col-sm-4 control-label"
+               for="inputPassword3"><strong>Investigation Start Date</strong></label>
+        <div class="col-sm-12">
+            <input type="date" class="form-control"
+                   id="startDate" placeholder="Investigation Start Date" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-4 control-label"
+               for="inputPassword3"><strong>Crime location Investigation details</strong></label>
+        <div class="col-sm-12">
+            <textarea class="form-control"
+                      id="locationDetails" placeholder="Crime location Investigation details"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label"
+               for="inputPassword3"><strong>Crime Location Images :</strong></label>
+        <div class="col-sm-2">
+            <input type="file"
+                   id="LocationImgs" multiple>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="WitnessModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Witness Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <label for="formGroupExampleInput"><strong>Full Name</strong></label>
+                                <input class="form-control" type="text" placeholder="Name" id="name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col col-lg-4">
+                                <label for="formGroupExampleInput"><strong>Contact Number</strong></label>
+                                <input class="form-control" type="number" placeholder="Contact Number" id="contact">
+                            </div>
+                            <div class="col col-lg-4">
+                                <label for="formGroupExampleInput"><strong>NIC</strong></label>
+                                <input class="form-control" type="text" placeholder="NIC" id="nic">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <label for="formGroupExampleInput"><strong>Address</strong></label>
+                                <input class="form-control" type="text" placeholder="Address" id="address">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <label for="formGroupExampleInput"><strong>Discription</strong></label>
+                                <textarea class="form-control" type="text" placeholder="Discription" id="discription"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="addrowWitness()"><i class="fas fa-plus"></i> Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="suspetsModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center"> Suspect Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <label for="formGroupExampleInput"><strong>Suspect Name</strong></label>
+                                <input class="form-control" type="text" placeholder="SuspectName" id="name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col col-lg-4">
+                                <label for="formGroupExampleInput"><strong>Contact Number</strong></label>
+                                <input class="form-control" type="number" placeholder="Contact Number" id="Suspectcontact">
+                            </div>
+                            <div class="col col-lg-4">
+                                <label for="formGroupExampleInput"><strong>Suspect NIC</strong></label>
+                                <input class="form-control" type="text" placeholder="NIC" id="Suspectnic">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <label for="formGroupExampleInput"><strong>Address</strong></label>
+                                <input class="form-control" type="text" placeholder="Address" id="Suspectaddress">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <label for="formGroupExampleInput"><strong>Status</strong></label>
+                                <select class="js-example-placeholder-single js-states form-control" id="Status" name="crime Type">
+                                    <option>Suspect</option>
+                                    <option>Convict</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="addrowSuspects()"><i class="fas fa-plus"></i> Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="padding:20px;background-color:lavender;border-radius:10px;margin-top:5%">
+    <div class="form-group">
+        <button type="button" data-toggle="modal" class="btn btn-primary" data-target="#WitnessModal"><i class="fas fa-plus"></i>Witnesses Details</button>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-10">
+                <table class="Witnesstable table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">NIC</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Contact Number</th>
+                            <th scope="col">Discription</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableWitness"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label"
+               for="inputPassword3"><strong>Upload Witness Document Statments :</strong></label>
+        <div class="col-sm-2">
+            <input type="file"
+                   id="witnessImgs" multiple>
+        </div>
+    </div>
+</div>
+<div style="padding:20px;background-color:lavender;border-radius:10px;margin-top:5%">
+    <div class="form-group">
+        <button type="button" data-toggle="modal" class="btn btn-primary" data-target="#suspetsModal"><i class="fas fa-plus"></i> Suspects Details</button>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-10">
+                <table class="Suspecttable table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Suspect Name</th>
+                            <th scope="col">NIC</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Contact No</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Image</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableSuspects"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label"
+               for="inputPassword3"><strong>Upload Suspect Statments :</strong></label>
+        <div class="col-sm-2">
+            <input type="file"
+                   id="suspectImgs" multiple>
+        </div>
+    </div>
+</div>
+<div style="padding:20px;background-color:lavender;border-radius:10px;margin-top:5%">
+    <div class="form-group">
+        <button type="button" data-toggle="modal" class="btn btn-primary" data-target="#SpecialModal"><i class="fas fa-plus"></i> Special Details</button>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-10">
+                <table class="tableSpecial table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Report Type</th>
+                            <th scope="col">Specialist Name</th>
+                            <th scope="col">Designation</th>
+                            <th scope="col">Document</th>
+                            <th scope="col">Discription</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tableSpecial"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="modal fade" id="SpecialModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center"> Special Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <label for="formGroupExampleInput"><strong>Report Type</strong></label>
+
+                                <select class="js-example-placeholder-single js-states form-control" id="SpecialReportType" name="crime Type">
+                                    <option>Forensic Report</option>
+                                    <option>SOCO Report</option>
+                                    <option>State Analisist</option>
+                                    <option>Fingur Print Report</option>
+                                    <option>Coroner Report</option>
+
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col col-lg-4">
+                                <label for="formGroupExampleInput"><strong>Specialist Name</strong></label>
+                                <input class="form-control" type="text" placeholder="Specialist Name" id="SpecialistName">
+                            </div>
+                            <div class="col col-lg-4">
+                                <label for="formGroupExampleInput"><strong>Designation</strong></label>
+                                <input class="form-control" type="text" placeholder="Designation" id="SpecialDesignation">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"
+                               for="inputPassword3"><strong>Upload Special Statments :</strong></label>
+                        <div class="col-sm-2">
+                            <input type="file"
+                                   id="specialImgs" multiple>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <label for="formGroupExampleInput"><strong>Discription</strong></label>
+                                <textarea class="form-control" type="text" placeholder="Discription" id="SpecialDiscription"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="SpecialAddrow()"><i class="fas fa-plus"></i> Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="padding:20px;background-color:lavender;border-radius:10px;margin-top:5%">
+    <div class="form-group">
+
+        <div class="row">
+            <div class="col col-lg-8">
+                <label for="formGroupExampleInput"><strong>Court Decision</strong></label>
+                <textarea class="form-control" type="number" placeholder="Court Decision" id="CourtDecision"></textarea>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group">
+
+        <div class="row">
+
+            <div class="col col-lg-8">
+                <label for="formGroupExampleInput"><strong>Punishment</strong></label>
+                <textarea class="form-control" type="text" placeholder="Punishment" id="Punishment"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+
+        <div class="row">
+            <div class="col col-lg-8">
+                <label for="formGroupExampleInput"><strong>Note</strong></label>
+                <textarea class="form-control" type="number" placeholder="Note" id="Note"></textarea>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div style="padding:10px;background-color:lavender;border-radius:10px;margin-top:5%;width:100%;height:100px;">
+    <div class="form-group">
+        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submit()" style="margin-top:2%;margin-left:90%;padding-left:20px;padding-right:20px"> Submit</button>
+    </div>
+</div>
+<div id="showerror">
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/select2-min.js"></script>
+<script src="~/Scripts/jscolar.js"></script>
+
+<script>
+        $('#selectUser').select2({
+            placeholder: "Select Officer.....",
+            allowClear: false
+        });
+
+
+        function addrow() {
+            var user = $('#selectUser').val();
+            $("#table").append("<tr><td>" + user + "</td></tr>");
+        }
+
+
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+        $('#suspetsModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+        $('#SpecialModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+        function addrowWitness() {
+            var name = $('#name')
+            var address = $('#address');
+            var nic = $('#nic');
+            var contact = $('#contact');
+            var discription = $('#discription');
+
+
+
+            $("#tableWitness").append("<tr><td>" + name.val() + "</td><td>" + nic.val() + "</td><td>" + address.val() + "</td><td>" + contact.val() + "</td><td>" + discription.val() + "</td></tr>");
+            name.val('')
+
+            address.val('')
+            nic.val('')
+            contact.val('')
+            discription.val('')
+        }
+
+        function addrowSuspects() {
+            var name = $('#SuspectName')
+            var address = $('#Suspectaddress');
+            var nic = $('#Suspectnic');
+            var contact = $('#Suspectcontact');
+            var Status = $('#Status');
+
+
+            $("#tableSuspects").append("<tr><td>" + name.val() + "</td><td>" + nic.val() + "</td><td>" + address.val() + "</td><td>" + contact.val() + "</td><td>" + Status.val() + "</td><td>" + Status.val() + "</td></tr>");
+            name.val('')
+
+            address.val('')
+            nic.val('')
+            contact.val('')
+
+        }
+
+        function SpecialAddrow() {
+
+            var Special = $('#SpecialDiscription');
+            var designation = $('#SpecialDesignation');
+            var discription = $('#SpecialDiscription');
+            var SpecialReportType = $('#SpecialReportType');
+            var SpecialistName = $('#SpecialistName');
+
+            $("#tableSpecial").append("<tr><td>" + SpecialReportType.val() + "</td><td>" + SpecialistName.val() + "</td><td>" + designation.val() + "</td><td>report</td><td>" + Special.val() + "</td></tr>");
+            Special.val('')
+            designation.val('')
+            discription.val('')
+            SpecialReportType.val('')
+            SpecialistName.val('')
+
+        }
+
+        function submit() {
+            //section1
+            var ComplaneName = $('#ComplaneName').val();
+            var ComplaneDate = $('#ComplaneDate').val();;
+            var ComplaneTime = $('#ComplaneTime').val();;
+            var ComplaniantName = $('#ComplaniantName').val();;
+            var ComplaniantAddress = $('#ComplaniantAddress').val();;
+            var ComplaniantContact = $('#ComplaniantContact').val();;
+            var ComplaniantTitle = $('#ComplaniantTitle').val();
+            var Statement = $('#Statement').val();
+            var station = $('#policeStation').val();
+            var location = $('#location').val();;
+            var crimeType = $('#crimeType').val();;
+            var ComplaneData = new Array();
+            ComplaneData[0] = {
+                "ComplaneName": ComplaneName,
+                "ComplaneTime": ComplaneTime,
+                "ComplaniantName": ComplaniantName,
+                "ComplaneDate": ComplaneDate,
+                "ComplaniantAddress": ComplaniantAddress,
+                "ComplaniantContact": ComplaniantContact,
+                "ComplaniantTitle": ComplaniantTitle,
+                "Statement": Statement,
+                "location": location,
+                "crimeType": crimeType,
+                "station":station
+            }
+
+            //section2
+            var TableOfficerData = new Array();
+
+            $('.tableOfficer tr').each(function (row, tr) {
+                TableOfficerData[row] = {
+                    "Officername": $(tr).find('td:eq(0)').text()
+                }
+            });
+            TableOfficerData.shift();  // first row will be empty - so remove
+
+            //Section3
+            var startDate = $('#startDate').val();;
+
+            var locationDetails = $('#locationDetails').val();
+
+            var InvestigationData = new Array();
+            InvestigationData[0] = {
+                "startDate": startDate,
+
+                "locationDetails": locationDetails
+            }
+        //section4
+            var WitnesstableData = new Array();
+            $('.Witnesstable tr').each(function (row, tr) {
+                WitnesstableData[row] = {
+                    "FullName": $(tr).find('td:eq(0)').text(),
+                    "NIC": $(tr).find('td:eq(1)').text(),
+                    "Address": $(tr).find('td:eq(2)').text(),
+                    "ContactNumber": $(tr).find('td:eq(3)').text(),
+                    "Discription": $(tr).find('td:eq(4)').text()
+
+                }
+            });
+            WitnesstableData.shift();
+
+            //section4
+            var TableSuspectData = new Array();
+
+            $('.Suspecttable tr').each(function (row, tr) {
+                TableSuspectData[row] = {
+                    "SuspectName": $(tr).find('td:eq(0)').text(),
+                    "NIC": $(tr).find('td:eq(1)').text(),
+                    "Address": $(tr).find('td:eq(2)').text(),
+                    "Contact": $(tr).find('td:eq(3)').text(),
+                    "Status": $(tr).find('td:eq(4)').text()
+                }
+            });
+            TableSuspectData.shift();
+
+            //Section5
+            var TableSpecialData = new Array();
+
+            $('.tableSpecial tr').each(function (row, tr) {
+                TableSpecialData[row] = {
+                    "ReportType": $(tr).find('td:eq(0)').text(),
+                    "SpecialistName": $(tr).find('td:eq(1)').text(),
+                    "Designation": $(tr).find('td:eq(2)').text(),
+                    "Discription": $(tr).find('td:eq(4)').text()
+
+                }
+            });
+            TableSpecialData.shift();
+
+            //section6
+            var CourtDecision = $('#CourtDecision').val();
+            var Punishment = $('#Punishment').val();;
+            var Note = $('#Note').val();
+
+            var CourtData = new Array();
+            CourtData[0] = {
+                "CourtDecision": CourtDecision,
+                "Punishment": Punishment,
+                "Note": Note
+            }
+            //convert to json
+       
+            var Court = JSON.stringify(CourtData);
+            var SpecialData = JSON.stringify(TableSpecialData);
+            var SuspectData = JSON.stringify(TableSuspectData);
+            var Investigation = JSON.stringify(InvestigationData);
+            var OfficerData = JSON.stringify(TableOfficerData);
+            var Complane = JSON.stringify(ComplaneData);
+            var WitnessData = JSON.stringify(WitnesstableData);
+             var url = '@Url.Action("saveData", "Crime")';
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: url,
+                    data: { Courtobj: Court, SpecialDataobj: SpecialData, SuspectDataobj: SuspectData, Investigationobj: Investigation, OfficerDataobj: OfficerData, Complaneobj: Complane, Witnessobj: WitnessData},
+                    dataType: "text",
+                    success: function (data) { uploadFiles() },
+                    error: function (request, status, error) {
+                        $("#showerror").append(request.responseText)
+                       
+                    }
+                });
+
+    }
+
+    function uploadFiles(data) {
+       
+       
+
+        var formData = new FormData();
+        var totalFiles = document.getElementById("FileUpload").files.length;
+     
+
+        for (var i = 0; i < totalFiles; i++) {
+            var file = document.getElementById("FileUpload").files[i];
+
+            formData.append("FileUpload", file);
+            
+        }
+       
+
+         var url = '@Url.Action("UploadFiles", "Crime")';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                
+                uploadLocationFiles() 
+            },
+            error: function (request, status, error) {
+                $("#showerror").append(request.responseText)
+                // alert(request.responseText);
+            }
+        });
+    }
+
+
+     function uploadLocationFiles() {
+       
+       
+
+        var formData = new FormData();
+         var totalFiles = document.getElementById("LocationImgs").files.length;
+     
+
+        for (var i = 0; i < totalFiles; i++) {
+            var file = document.getElementById("LocationImgs").files[i];
+
+            formData.append("LocationImgs", file);
+            
+        }
+       
+
+         var url = '@Url.Action("UploadLocationFiles", "Crime")';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                alert('succes!!');
+            },
+            error: function (request, status, error) {
+                $("#showerror").append(request.responseText)
+                // alert(request.responseText);
+            }
+        });
+    }
+
+       
+</script>

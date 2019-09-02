@@ -141,6 +141,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CrimeController.cs" />
     <Compile Include="Controllers\SuspectController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -149,11 +150,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Crime.cs" />
+    <Compile Include="Models\CrimeImages.cs" />
+    <Compile Include="Models\CrimeOfficer.cs" />
+    <Compile Include="Models\CrimeSuspects.cs" />
+    <Compile Include="Models\Investigation.cs" />
+    <Compile Include="Models\InvestigationResults.cs" />
+    <Compile Include="Models\LocationImages.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Relation.cs" />
     <Compile Include="Models\Suspect.cs" />
+    <Compile Include="Models\SpecialReports.cs" />
     <Compile Include="Models\Temp.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Witnesses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SISS.cs" />
   </ItemGroup>
@@ -172,6 +182,7 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\Layout.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\select2-min.css" />
     <Content Include="Content\sidebar-themes.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -193,6 +204,7 @@
     <Content Include="Content\sass\_variables.scss" />
     <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -202,8 +214,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jscolar.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\select2-min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -227,9 +241,11 @@
     <Content Include="Views\Officer\searchOfficer.cshtml" />
     <Content Include="Views\Suspect\AddSuspect.cshtml" />
     <Content Include="Views\Suspect\SearchSuspect.cshtml" />
+    <Content Include="Views\Crime\AddCrimeRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Suspects\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

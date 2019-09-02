@@ -61,5 +61,101 @@ namespace SISS.Controllers
             return Json("List Saved!", JsonRequestBehavior.AllowGet);
         }
 
-   }
+
+        public ActionResult findsuspect(String KeyWord)
+        {
+            using (SISS_Context db = new SISS_Context())
+            {
+                string x = KeyWord.Replace("\"", "");
+                try
+                {
+                    string query = "SELECT * FROM Suspects WHERE CONCAT(FullName,NickName,Address,AddBy,CurrentCity,BirthDay,NIC,ContactNumber,NameWithInitials) LIKE '%" + x + "%' ORDER BY FullName ASC";
+                    var searchData = db.Database.SqlQuery<Suspect>(query).ToList();
+
+                    return Json(searchData);
+
+                }
+                catch (Exception e)
+                {
+                    return Json(e);
+                }
+
+            }
+        }
+
+         [HttpPost]
+        public ActionResult findsuspectRecord(int suspectId)
+        {
+           
+
+            using (SISS_Context db = new SISS_Context())
+            {
+
+                try
+                {
+                    string query = "SELECT * FROM Suspects WHERE SuspectID=" + suspectId ;
+                    var searchData = db.Database.SqlQuery<Suspect>(query).ToList();
+                    return Json(searchData);
+
+                }
+                catch (Exception e)
+                {
+                    return Json(e);
+                }
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult updateSuspect(string suspect)
+        {
+            JArray suspectList = JArray.Parse(suspect) as JArray;
+            using (SISS_Context db = new SISS_Context())
+            {
+                try
+                {
+
+
+                    foreach (JObject item in suspectList)
+                    {
+                        string query = "UPDATE Suspects SET FullName = '" + item["FullName"] + "', NickName = '" + item["nic"] + "', BirthDay = '" + item["dob"] + "',Address = '" + item["address"] + "',CurrentCity = '" + item["city"] + "',NameWithInitials = '" + item["initial"] + "',NIC = '" + item["nicNum"] + "',ContactNumber = '" + Int32.Parse(item["telephone"].ToString()) + "' WHERE SuspectID='" + item["id"] + "'";
+                        db.Database.ExecuteSqlCommand(query);
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    return this.Json(e, JsonRequestBehavior.AllowGet);
+
+                }
+            }
+            return Json("Suspect Data Updated!", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult deleteSuspect(int suspectId)
+        {
+            using (SISS_Context db = new SISS_Context())
+            {
+                try
+                {
+
+
+
+                    string query = "DELETE FROM Suspects WHERE SuspectID=" + suspectId;
+                    db.Database.ExecuteSqlCommand(query);
+
+
+                }
+                catch (Exception e)
+                {
+                    return this.Json(e, JsonRequestBehavior.AllowGet);
+
+                }
+            }
+            return Json("Suspect Data Deleted!", JsonRequestBehavior.AllowGet);
+        }
+
+
+    }
 }

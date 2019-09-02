@@ -28,6 +28,7 @@ namespace SISS.Models
         public string officerJoindDate { get; set; }
         [Required(ErrorMessage = "Plese Fill Designation")]
         public string officerDesignation { get; set; }
+     
         [Required(ErrorMessage = "Plese Fill NIC Number")]
         public string officerNIC { get; set; }
         [Required(ErrorMessage = "Plese Fill Gender")]

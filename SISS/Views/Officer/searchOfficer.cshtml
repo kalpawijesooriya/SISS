@@ -14,7 +14,7 @@
 <form>
     <div class="p-1 bg-light rounded  shadow-sm mb-4 container">
         <div class="input-group row spe">
-            <input type="search" id="myInput" name="myCountry" placeholder="Search..." aria-describedby="button-addon1" class="form-control border-0 bg-light">
+            <input type="search" id="myInput" name="myCountry" placeholder="Search Officers..." aria-describedby="button-addon1" class="form-control border-0 bg-light">
 
             <div class="input-group-append">
                 <button id="subbutton" type="button" class="btn btn-link text-primary" onclick="showUsers()"><i class="fa fa-search"></i></button>
@@ -334,7 +334,7 @@
         function createcard(data) {
             $("#card").empty();
             data.forEach(function (ele) {
-                var card = '<div class="col-6 col-md-4" style="margin-bottom:20px"> <div class="card" style="width: 18rem;"><img class="card-img-top" src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg" alt="Card image cap"><div class="card-body"><h5 class="card-title" >' + ele.officerFullName + '</h5></div><ul class="list-group list-group-flush"><li class="list-group-item"><strong>Police Station : </strong> ' + ele.officerPoliceStation + '</li><li class="list-group-item"><strong>Designation : </strong> ' + ele.officerDesignation + '</li><li class="list-group-item"><strong>Contact : </strong> ' + ele.officerTelephone + '</li></ul ><div class="card-body"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalHorizontal" data-id="' + ele.UserEmployeeNumber + '" onclick="myfunction(this)">Update</button><button type="button" class="btn btn-danger" data-id="' + ele.UserEmployeeNumber + '" onclick="DeleteUser(this)">Delete</button><button type="button" class="btn btn-info"> More</button></a></div></div></div>'
+                var card = '<div class="col-6 col-md-4" style="margin-bottom:20px"> <div class="card" style="width: 18rem;"><img class="card-img-top" src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg" alt="Card image cap"><div class="card-body"><h5 class="card-title" >' + ele.officerFullName + '</h5></div><ul class="list-group list-group-flush"><li class="list-group-item"><strong>Police Station : </strong> ' + ele.officerPoliceStation + '</li><li class="list-group-item"><strong>Designation : </strong> ' + ele.officerDesignation + '</li><li class="list-group-item"><strong>Contact : </strong> ' + ele.officerTelephone + '</li></ul ><div class="card-body"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalHorizontal" data-id="' + ele.UserEmployeeNumber + '" onclick="myfunction(this)">Update</button><button type="button" class="btn btn-danger" data-id="' + ele.UserEmployeeNumber + '" onclick="DeleteUser(this)">Delete</button><button type="button" class="btn btn-info" data-id="' + ele.UserEmployeeNumber + '" onclick="myfunction(this)" data-toggle="modal" data-target="#myModalHorizontal" > More</button></a></div></div></div>'
                 $("#card").append(card)
             })
 
@@ -420,6 +420,7 @@
             data: { user: data },
             dataType: "text",
             success: function (data) {
+
                 showUsers()
                 $('#myModalHorizontal').modal('toggle');
             }

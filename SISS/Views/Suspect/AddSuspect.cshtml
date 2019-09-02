@@ -8,7 +8,7 @@
 
 
 
-@using (Html.BeginForm( new { htmlAttributes = new { @class = "form-control required", @id = "formId" } }))
+@using (Html.BeginForm(new { htmlAttributes = new { @class = "form-control required", @id = "formId" } }))
 {
 
 
@@ -17,6 +17,10 @@
     <script src="../../Scripts/jquery.validate.unobtrusive.min.js"></script>
     <link href="../../Content/bootstrap.css" rel="stylesheet" />
 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
 
     <div class="form-horizontal" style="margin-left:7%">
@@ -30,8 +34,8 @@
             <div class="row">
                 <div class="col-md-10">
                     <label for="formGroupExampleInput"><strong>Full Name</strong></label>
-                    @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", @required = "required",@placeholder = "Full Name", @id = "FullName" })
-                  
+                    @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", @required = "required", @placeholder = "Full Name", @id = "FullName" })
+
                     @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -135,12 +139,11 @@
 
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary" style="width:100px" id="subbutton"  >Save</button>
+            <button type="submit" class="btn btn-primary" style="width:100px" id="subbutton">Save</button>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10" style="color:green">
                 <lable style="color:red">@Html.DisplayFor(model => model.SuspectErrorMessage, "", new { @class = "text-danger" })</lable>
-
             </div>
         </div>
         <div class="form-group">
@@ -154,7 +157,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title text-center">Modal Header</h4>
+                        <h4 class="modal-title text-center">Add Relations</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                     </div>
@@ -262,7 +265,7 @@
         TableData = storeTblValues()
       //  TableData = $.toJSON(TableData);
         $("#subbutton").on("click", function (e) {
-            
+
           var FullName = $('#FullName').val();
             var Initials = $('#Initials').val();
             var Nick = $('#Nick').val();
@@ -273,7 +276,7 @@
             var CurrentCity = $('#CurrentCity').val();
 
             if (FullName === "" || Initials === "" || Nick === "" || Address === "" || NICNum === "" || Telephone === "" || BirthDay === "" || CurrentCity === "") {
-                
+
             } else {
                 e.preventDefault();
             var SuspectData = new Array();
@@ -302,12 +305,12 @@
 
 
             }
-           
 
-         
+
+
         });
 
-     
+
 
 
 
