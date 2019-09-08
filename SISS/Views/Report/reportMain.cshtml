@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "reportMain";
+}
+
+
+<script src="../../Scripts/jquery-3.3.1.min.js"></script>
+<script src="../../Scripts/jquery.validate.min.js"></script>
+<script src="../../Scripts/jquery.validate.unobtrusive.min.js"></script>
+<link href="../../Content/bootstrap.css" rel="stylesheet" />
+
+<div class="form-horizontal" style="margin-left:7%">
+    <div class="form-group">
+        <h4><strong>Crime Derection Reports</strong></h4>
+    </div>
+</div>
+<div style="margin-left:5%;margin-right:7%;padding:20px;background-color:lavender;border-radius:10px">
+    <div class="form-group">
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="formGroupReport"><strong>From Date</strong></label>
+                @Html.TextBox("YourTextBox", "", new { @class = "form-control", @id = "from_date", @placeholder = "From date", @type = "date" })
+
+            </div>
+
+            <div class="form-group col-md-1"></div>
+            <div class="form-group col-md-5 align-self-end">
+                <label for="formGroupReport"><strong>To Date </strong></label>
+                @Html.TextBox("YourTextBox", "", new { @class = "form-control", @id = "to_date", @placeholder = "To date", @type = "date" })
+
+            </div>
+        </div>
+
+        <div>
+            <div class="form-group col-md-pull-9"></div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" style="width:100px" id="button" onclick="reportVal()">Find</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin: 7%">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Crime ID</th>
+                <th scope="col">Crime Name</th>
+                <th scope="col">Police station</th>
+                <th scope="col">Crime Location</th>
+                <th scope="col">Complain Date</th>
+                <th scope="col">Investigation Status</th>
+            </tr>
+        </thead>
+        <tbody id="rep">
+            
+        </tbody>
+    </table>
+</div>
+<script>
+    function reportVal() {
+        var fromDate = $('#from_date').val();
+        var toDate = $('#to_date').val();
+        var url = '@Url.Action("findCrimeDetailsforReports", "Report")';
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: url,
+            data: { fromDate: fromDate, toDate:toDate},
+            dataType: "text",
+            success: function (data) {
+                showResults(JSON.parse(data));
+            }
+        })
+
+        function showResults(data){
+            data.forEach(function (ele) {
+                var xy = " < tr > <td>" + ele.CrimeId + "</td> <td>" + ele.CrimeName + "</td> <td>" + ele.policeStation + "</td> <td>" + ele.CrimeLocation + "</td> <td>" + ele.ComplaineDate + "</td> <td>" + ele.InvestigationStatus + "</td></tr>";
+                $("#rep").append(xy);
+                
+            })
+        }
+    }
+
+
+</script>
+     
+           
+
+
+
+

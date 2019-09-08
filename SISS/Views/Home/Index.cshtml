@@ -1,6 +1,52 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@using Newtonsoft.Json.Linq;
+@using System.Linq;
+@using System.Web.Mvc;
+@using System;
+@using System.Collections.Generic;
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">DashBord</span>
+</nav>
 
 
 
+<div class="container">
+    <div class="row" id="card">
+        
+    </div>
+</div>
+<div id="showerror">
+</div>
+<script>
+
+    var userID ='@Session["userID"]'
+       var url = '@Url.Action("myCrimes", "Home")';
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: url,
+                    data: { userid: userID},
+                    dataType: "text",
+                    success: function (data) {
+                      
+                        createcard(JSON.parse(data));
+                    },error: function (request, status, error) {
+                        $("#showerror").append(request.responseText)
+
+                    }
+        });
+
+
+    function createcard(data) {
+        $("#card").empty();
+        data.forEach(function (ele) {
+            var card = '<div class="col-lg-3" style="margin-top:25px;margin-left:25px"><div class="card" style="width: 18rem;"><img src="' + ele.imagePath + '" class="card-img-top" alt="..." style="height:200px"><div class="card-body"><h5 class="card-title">' + ele.CrimeName + '</h5><p class="card-text"><strong>Police Station : </strong>' + ele.policeStation + '</br><strong>Crime Date : </strong>' + ele.ComplaineDate + '</br>' + ele.Statment+'</p><a href="#" class="btn btn-primary">More Details</a></div></div ></div >'
+            $("#card").append(card)
+        })
+
+    }
+</script>

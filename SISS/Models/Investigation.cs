@@ -14,7 +14,7 @@ namespace SISS.Models
         public string InvestigationStartDate { get; set; }
         public string CrimeLocationInvestigationDetails { get; set; }
         public int CrimeId { get; set; }
-        public string Status { get; set; }
+        public string InvestigationStatus { get; set; }
         [ForeignKey("CrimeId")]
         public Crime Crime { get; set; }
      

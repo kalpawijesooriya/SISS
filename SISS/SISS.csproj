@@ -142,6 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CrimeController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SuspectController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -178,7 +179,25 @@
     <Content Include="Content\Images\bg4.jpg" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\Sri_Lanka_Police_logo.svg" />
+    <Content Include="Content\Images\Suspects\20190113_124235.jpg" />
+    <Content Include="Content\Images\Suspects\23795737_712423785616335_7139866187438885886_n %281%29.jpg" />
+    <Content Include="Content\Images\Suspects\5.jpg" />
+    <Content Include="Content\Images\Suspects\52561405_295796094418588_3029270223761965056_n.jpg" />
+    <Content Include="Content\Images\Suspects\7.jpg" />
+    <Content Include="Content\Images\Suspects\crime1.jpg" />
+    <Content Include="Content\Images\Suspects\crime2.jpg" />
+    <Content Include="Content\Images\Suspects\crime3.jpg" />
+    <Content Include="Content\Images\Suspects\crime4.jpg" />
+    <Content Include="Content\Images\Suspects\flinteclogo.png" />
+    <Content Include="Content\Images\Suspects\Screenshot %281%29.png" />
+    <Content Include="Content\Images\Suspects\Screenshot %2810%29.png" />
+    <Content Include="Content\Images\Suspects\Screenshot %2814%29.png" />
+    <Content Include="Content\Images\Suspects\Screenshot %285%29.png" />
+    <Content Include="Content\Images\Suspects\Screenshot %286%29.png" />
+    <Content Include="Content\Images\Suspects\Screenshot %287%29.png" />
     <Content Include="Content\Images\user.jpg" />
+    <Content Include="Content\jquery-confirm.css" />
+    <Content Include="Content\jquery-confirm.min.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\Layout.css" />
     <Content Include="Content\main.css" />
@@ -203,6 +222,7 @@
     <Content Include="Content\sass\_sidebar-wrapper.scss" />
     <Content Include="Content\sass\_variables.scss" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="Content\jquery-confirm.less" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -210,6 +230,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-confirm.js" />
+    <Content Include="Scripts\jquery-confirm.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -242,10 +264,11 @@
     <Content Include="Views\Suspect\AddSuspect.cshtml" />
     <Content Include="Views\Suspect\SearchSuspect.cshtml" />
     <Content Include="Views\Crime\AddCrimeRecord.cshtml" />
+    <Content Include="Views\Crime\EditCrimeRepot.cshtml" />
+    <Content Include="Views\Report\reportMain.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\Suspects\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

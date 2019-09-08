@@ -12,8 +12,8 @@ namespace SISS.Models
 
 
         [Key]
-        public int CrimeImageId { get; set; }
-        public string imagePath { get; set; }
+        public int LocationImageId { get; set; }
+        public string LocationimagePath { get; set; }
         public int InvestigationId { get; set; }
         [ForeignKey("InvestigationId")]
         public Investigation Investigation { get; set; }

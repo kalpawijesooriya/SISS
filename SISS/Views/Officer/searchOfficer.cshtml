@@ -156,7 +156,7 @@
                         data-dismiss="modal">
                     Close
                 </button>
-                <button type="button" class="btn btn-primary" onclick="updateUser()">
+                <button type="button" class="btn btn-primary" onclick="updateUser()" id="update"  data-dismiss="modal">
                     Save changes
                 </button>
             </div>
@@ -334,7 +334,7 @@
         function createcard(data) {
             $("#card").empty();
             data.forEach(function (ele) {
-                var card = '<div class="col-6 col-md-4" style="margin-bottom:20px"> <div class="card" style="width: 18rem;"><img class="card-img-top" src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg" alt="Card image cap"><div class="card-body"><h5 class="card-title" >' + ele.officerFullName + '</h5></div><ul class="list-group list-group-flush"><li class="list-group-item"><strong>Police Station : </strong> ' + ele.officerPoliceStation + '</li><li class="list-group-item"><strong>Designation : </strong> ' + ele.officerDesignation + '</li><li class="list-group-item"><strong>Contact : </strong> ' + ele.officerTelephone + '</li></ul ><div class="card-body"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalHorizontal" data-id="' + ele.UserEmployeeNumber + '" onclick="myfunction(this)">Update</button><button type="button" class="btn btn-danger" data-id="' + ele.UserEmployeeNumber + '" onclick="DeleteUser(this)">Delete</button><button type="button" class="btn btn-info" data-id="' + ele.UserEmployeeNumber + '" onclick="myfunction(this)" data-toggle="modal" data-target="#myModalHorizontal" > More</button></a></div></div></div>'
+                var card = '<div class="col-6 col-md-4" style="margin-bottom:20px"> <div class="card" style="width: 18rem;"><img class="card-img-top" src="https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg" alt="Card image cap"><div class="card-body"><h5 class="card-title" >' + ele.officerFullName + '</h5></div><ul class="list-group list-group-flush"><li class="list-group-item"><strong>Police Station : </strong> ' + ele.officerPoliceStation + '</li><li class="list-group-item"><strong>Designation : </strong> ' + ele.officerDesignation + '</li><li class="list-group-item"><strong>Contact : </strong> ' + ele.officerTelephone + '</li></ul ><div class="card-body"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalHorizontal" data-condition="update" data-id="' + ele.UserEmployeeNumber + '" onclick="myfunction(this)">Update</button><button type="button" class="btn btn-danger" data-id="' + ele.UserEmployeeNumber + '" onclick="DeleteUser(this)">Delete</button><button type="button" class="btn btn-info" data-condition="more" data-id="' + ele.UserEmployeeNumber + '" onclick="myfunction(this)" data-toggle="modal" data-target="#myModalHorizontal" > More</button></a></div></div></div>'
                 $("#card").append(card)
             })
 
@@ -348,7 +348,13 @@
 
         var url = '@Url.Action("findUser", "Officer")';
         var id = $(param).data('id');
-    
+        var condition = $(param).data('condition');
+        if (condition == "more") {
+            $("#update").hide()
+
+        } else {
+            $("#update").show();
+        }
         $.ajax({
             type: 'POST',
             async: false,
@@ -422,13 +428,15 @@
             success: function (data) {
 
                 showUsers()
-                $('#myModalHorizontal').modal('toggle');
+
             }
         });
 
 
     }
     function DeleteUser(param) {
+        var r = confirm("Are you sure you want to delete?");
+        if (r == true) {
         var id = $(param).data('id');
          var url = '@Url.Action("deleteUser", "Officer")';
         $.ajax({
@@ -442,6 +450,11 @@
 
             }
         });
+        } else {
+            txt = "Cancel!";
+        }
+       
+       
 
     }
 

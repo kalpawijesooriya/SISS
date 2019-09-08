@@ -1,6 +1,6 @@
 ﻿@model SISS.Models.User
 @{
-    ViewBag.Title = "AddCrimeRecord";
+    ViewBag.Title = "Edit CrimeRecord";
 }
 <link href="~/Content/select2-min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -9,8 +9,33 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 <nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h1">Add Crime Record</span>
+    <span class="navbar-brand mb-0 h1">Edit Crime Record</span>
 </nav>
+
+<form style="margin-top:25px">
+    <div class="p-1 bg-light rounded  shadow-sm mb-4 container">
+        <div class="input-group row spe">
+            <div class="col-lg-8">
+                <select class="js-example-placeholder-single js-states form-control" id="selectCrime" name="selectline">
+                    <option></option>
+                    @foreach (var item in ViewBag.crimeList)
+                    {
+                        <option value="@item.CrimeId">@item.CrimeId-@item.CrimeName-@item.ComplaineDate</option>
+                    }
+                </select>
+              </div>
+                <div class="input-group-append col-lg-4">
+                    <button id="subbutton" type="button" class="btn btn-link text-primary" onclick="SearchCrime()"><i class="fa fa-search"></i></button>
+                </div>
+
+            </div>
+            <div class="autocomplete" id="auto">
+
+            </div>
+        </div>
+
+
+</form>
 <div style="padding:20px;background-color:lavender;border-radius:10px;margin-top:20px">
     <input type="hidden" class="form-control"
            id="id" placeholder="Police Station" />
@@ -122,7 +147,7 @@
                        id="FileUpload" multiple>
             </div>
         </div>
-       
+
     </form>
 </div>
 
@@ -519,8 +544,13 @@
         $('#selectUser').select2({
             placeholder: "Select Officer.....",
             allowClear: false
-        });
+    });
 
+    $('#selectCrime').select2({
+        placeholder: "Select Crime.....",
+        allowClear: false
+    });
+   
 
         function addrow() {
             var user = $('#selectUser').val();
@@ -652,7 +682,7 @@
             });
             WitnesstableData.shift();
 
-            //section5
+            //section4
             var TableSuspectData = new Array();
 
             $('.Suspecttable tr').each(function (row, tr) {
@@ -666,7 +696,7 @@
             });
             TableSuspectData.shift();
 
-            //Section6
+            //Section5
             var TableSpecialData = new Array();
 
             $('.tableSpecial tr').each(function (row, tr) {
@@ -692,7 +722,7 @@
                 "Note": Note
             }
             //convert to json
-       
+
             var Court = JSON.stringify(CourtData);
             var SpecialData = JSON.stringify(TableSpecialData);
             var SuspectData = JSON.stringify(TableSuspectData);
@@ -710,27 +740,27 @@
                     success: function (data) { uploadFiles() },
                     error: function (request, status, error) {
                         $("#showerror").append(request.responseText)
-                       
+
                     }
                 });
 
     }
 
     function uploadFiles(data) {
-       
-       
+
+
 
         var formData = new FormData();
         var totalFiles = document.getElementById("FileUpload").files.length;
-     
+
 
         for (var i = 0; i < totalFiles; i++) {
             var file = document.getElementById("FileUpload").files[i];
 
             formData.append("FileUpload", file);
-            
+
         }
-       
+
 
          var url = '@Url.Action("UploadFiles", "Crime")';
         $.ajax({
@@ -741,8 +771,8 @@
             contentType: false,
             processData: false,
             success: function (response) {
-                
-                uploadLocationFiles() 
+
+                uploadLocationFiles()
             },
             error: function (request, status, error) {
                 $("#showerror").append(request.responseText)
@@ -753,20 +783,20 @@
 
 
      function uploadLocationFiles() {
-       
-       
+
+
 
         var formData = new FormData();
          var totalFiles = document.getElementById("LocationImgs").files.length;
-     
+
 
         for (var i = 0; i < totalFiles; i++) {
             var file = document.getElementById("LocationImgs").files[i];
 
             formData.append("LocationImgs", file);
-            
+
         }
-       
+
 
          var url = '@Url.Action("UploadLocationFiles", "Crime")';
         $.ajax({
@@ -786,5 +816,75 @@
         });
     }
 
+
+</script>
+
+
+
+
+
+
+
+<script>
+   
+
+    function SearchCrime() {
+
+        var Key = $('#selectCrime').val();
+        var res = Key.split('-');
+           var url = '@Url.Action("findCrime", "Crime")';
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: url,
+                    data: { Key: res[0]},
+                    dataType: "text",
+                    success: function (data) {
+                        showResults(JSON.parse(data));
+                     }
+       });
+
+
+
+    }
+    function showResults(data)
+    {
+        data.forEach(function (ele) {
+            var officertable = '<tr><td>' + ele.UserEmployeeNumber+'</td></tr>'
+            $("#table").append(officertable)
+
+            $('#ComplaneName').val(ele.CrimeName);
+            $('#ComplaneDate').val(ele.ComplaineDate);
+            $('#ComplaneTime').val(ele.ComplaineTime);
+            $('#ComplaniantName').val(ele.ComplainantName);
+            $('#ComplaniantAddress').val(ele.ComplainAddress);
+            $('#ComplaniantContact').val(ele.ComplainContactNo);
+            $('#ComplaniantTitle').val(ele.ComplainTitle);
+            $('#Statement').val(ele.Statment);
+            $('#policeStation').val(ele.policeStation);
+            $('#location').val(ele.CrimeLocation);
+            $('#crimeType').val(ele.CrimeType);
+
+            $('#startDate').val(ele.InvestigationStartDate);
+            $('#locationDetails').val(ele.CrimeLocationInvestigationDetails);
+
+            $("#tableWitness").append("<tr><td>" + ele.WitnessName + "</td><td>" + ele.WitnessNIC + "</td><td>" + ele.WitnessAddress + "</td><td>" + ele.WitnessTelephone + "</td><td>" + ele.WitnessDiscription + "</td></tr>");
+
+            $("#tableSpecial").append("<tr><td>" + ele.ReportType + "</td><td>" + ele.SpecialistName + "</td><td>" + ele.Designation + "</td><td>report</td><td>" + ele.Discription + "</td></tr>");
+
+            $("#tableSuspects").append("<tr><td>" + ele.FullName + "</td><td>" + ele.NIC + "</td><td>" + ele.Address + "</td><td>" + ele.ContactNumber + "</td><td>" + ele.SuspectStatus + "</td><td>" + ele.SuspectStatus + "</td></tr>");
+        })
+
+
        
+    }
+
+   
+   
+
+
+    
+
+
+
 </script>

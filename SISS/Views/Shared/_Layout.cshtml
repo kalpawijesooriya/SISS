@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
           content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
-    <title>Sidebar template</title>
+    <title>SL-SISS</title>
     <!-- using online links -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -35,7 +35,7 @@
                 <div class="sidebar-content">
                     <!-- sidebar-brand  -->
                     <div class="sidebar-item sidebar-brand">
-                        <a href="#">pro sidebar</a>
+                        <a href="#">SL-SISS</a>
                     </div>
                     <!-- sidebar-header  -->
                     <div class="sidebar-item sidebar-header d-flex flex-nowrap">
@@ -74,7 +74,7 @@
                                 <span>General</span>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="@Url.Action("Index","Home")">
                                     <i class="fa fa-tachometer-alt"></i>
                                     <span class="menu-text">Dashboard</span>
                                    
@@ -82,7 +82,7 @@
                             </li>
                             <li class="sidebar-dropdown">
                                 <a href="#">
-                                    <i class="fa fa-shopping-cart"></i>
+                                    <i class="far fa-user"></i>
                                     <span class="menu-text">Officer Details</span>
                                    
                                 </a>
@@ -103,7 +103,7 @@
                             </li>
                             <li class="sidebar-dropdown">
                                 <a href="#">
-                                    <i class="far fa-gem"></i>
+                                    <i class="fas fa-book-reader"></i>
                                     <span class="menu-text">Suspect Details</span>
                                 </a>
                                 <div class="sidebar-submenu">
@@ -120,17 +120,18 @@
                             </li>
                             <li class="sidebar-dropdown">
                                 <a href="#">
-                                    <i class="fa fa-chart-line"></i>
+                                    <i class="fas fa-clipboard"></i>
                                     <span class="menu-text">Crime Record</span>
                                 </a>
                                 <div class="sidebar-submenu">
-                                    <ul>
+                                    
                                     <ul>
                                         <li>
                                             <a href="@Url.Action("AddCrimeRecord","Crime")">Add Crime Record</a>
                                         </li>
                                         <li>
-                                            <a href="#">Search Crime Record</a>
+                                          
+                                            <a href="@Url.Action("EditCrimeRepot","Crime")">Search Crime Record</a>
                                         </li>
                                         <li>
                                             <a href="#">Current Unsolved cases</a>
@@ -140,8 +141,8 @@
                                 </div>
                             </li>
                             <li class="sidebar-dropdown">
-                                <a href="#">
-                                    <i class="fa fa-globe"></i>
+                                <a href="@Url.Action("reportMain","Report")">
+                                    <i class="fas fa-receipt"></i>
                                     <span class="menu-text">Reports</span>
                                 </a>
                                 <div class="sidebar-submenu">
@@ -155,28 +156,10 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="header-menu">
-                                <span>Extra</span>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-book"></i>
-                                    <span class="menu-text">Documentation</span>
-                                  
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-calendar"></i>
-                                    <span class="menu-text">Calendar</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-folder"></i>
-                                    <span class="menu-text">Examples</span>
-                                </a>
-                            </li>
+                            
+                            
+                            
+                            
                         </ul>
                     </div>
                     <!-- sidebar-menu  -->

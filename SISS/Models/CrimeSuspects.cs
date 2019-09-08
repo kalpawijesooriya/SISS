@@ -15,7 +15,7 @@ namespace SISS.Models
         public string Address { get; set; }     
         public string NIC { get; set; }   
         public string ContactNumber { get; set; }
-        public string Status { get; set; }
+        public string SuspectStatus { get; set; }
         
         public int InvestigationId { get; set; }
         [ForeignKey("InvestigationId")]
